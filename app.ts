@@ -15,34 +15,41 @@ $(document).ready(function () {
         } else {
             $('#emailMandatory').hide();
             bool.email = true;
-            
+
         }
         checkSubmit();
+    });
+
+    $('#mediaChannelSelect').change(function () {
+        if ($('#mediaChannelSelect').val() == 'Other') {
+            $('#otherMediaChannel').show();
+        } else {
+            $('#otherMediaChannel').hide();
+        }
     });
     
     onOrOff('#firstName', '#firstNameMandatory');
     onOrOff('#lastName', '#lastNameMandatory');
     onOrOff('#email', '#emailMandatory');
-    onOrOff('#mediaChannelSelect', '#otherMediaChannel');
 
-    function onOrOff(InputId: String,id:String){
+    function onOrOff(InputId: String, id: String) {
         $(InputId).change(function () {
-            if ($(InputId).val() == 'Other') {
+            if ($(InputId).val() == '') {
                 $(id).show();
-                bool[InputId.slice(1,InputId.length)]=false;
+                bool[InputId.slice(1, InputId.length)] = false;
             } else {
                 $(id).hide();
-                bool[InputId.slice(1,InputId.length)]=true;
+                bool[InputId.slice(1, InputId.length)] = true;
             }
             checkSubmit();
         });
     }
-    
-    function checkSubmit(){
-        if(bool.email && bool.firstName && bool.lastName){
-            $('.btn-primary').prop('disabled',false);
+
+    function checkSubmit() {
+        if (bool.email && bool.firstName && bool.lastName) {
+            $('.btn-primary').prop('disabled', false);
         } else {
-            $('.btn-primary').prop('disabled',true);
+            $('.btn-primary').prop('disabled', true);
         }
     }
 });
